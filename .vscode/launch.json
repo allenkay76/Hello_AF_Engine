@@ -1,0 +1,44 @@
+{
+    "configurations": [
+        
+
+        {
+            "name": "C/C++: Windows g++.exe DEBUG",
+            "type": "cppdbg",
+            "request": "launch",
+            // Path to the executable to debug
+            "program": "${workspaceFolder}/bin/Hello_AF_Engine.exe",
+            // Command line arguments to the executable
+            "args": [],
+            // Whether or not to stop at the entry point of the program
+            "stopAtEntry": false,
+            // Current working directory of the program
+            "cwd": "${workspaceFolder}",
+            // Environment variables to set for the program
+            "environment": [
+            ],
+            // Which console to use for input/output
+            "console": "internalConsole",
+            // Which debugger to use
+            "MIMode": "gdb",
+            // Path to the debugger executable
+            "miDebuggerPath": "C:/MinGW/bin/gdb.exe",
+            // Commands to send to the debugger before the program starts
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            // Task to run before launching the program
+            "preLaunchTask": "C/C++: g++.exe AF_Math build windows DEBUG"
+        }
+    ],
+    "version": "2.0.0"
+}
