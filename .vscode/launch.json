@@ -3,7 +3,7 @@
         
 
         {
-            "name": "C/C++: Windows g++.exe DEBUG",
+            "name": "RUN_Hello_AF_Engine_Win_DEBUG",
             "type": "cppdbg",
             "request": "launch",
             // Path to the executable to debug
@@ -37,7 +37,7 @@
                 }
             ],
             // Task to run before launching the program
-            "preLaunchTask": "C/C++: g++.exe AF_Math build windows DEBUG"
+            "preLaunchTask": "Build_Hello_AF_ENGINE_Win_DEBUG"
         }
     ],
     "version": "2.0.0"

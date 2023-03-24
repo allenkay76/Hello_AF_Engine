@@ -46,7 +46,7 @@
             "dependsOn": "clean"
         },       
         {
-            "label": "C/C++: g++.exe AF_Math build windows DEBUG",  // A label for the command
+            "label": "Build_Hello_AF_ENGINE_Win_DEBUG",  // A label for the command
             "type": "shell",  // Specifies that this is a shell command
             "command": "g++",  // The command to execute (g++)
             "args": [
@@ -68,7 +68,8 @@
                 "-static-libgcc",  // Link statically against libgcc
                 "-static-libstdc++",  // Link statically against libstdc++
                 "-L${workspaceFolder}/bin",  // Add the binary directory to the library search path
-                "-lAF_Math"  // Link against the AF_Math library
+                "-lAF_Math",  // Link against the AF_Math library
+                "-lAF_Engine",  // Link against the AF_Engine library
             ],
             "options": {
                 "cwd": "${workspaceFolder}"  // Set the current working directory to the workspace folder
