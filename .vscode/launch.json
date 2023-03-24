@@ -9,7 +9,7 @@
             // Path to the executable to debug
             "program": "${workspaceFolder}/bin/Hello_AF_Engine.exe",
             // Command line arguments to the executable
-            "args": [],
+            "args": ["config/AF_Engine.json"],
             // Whether or not to stop at the entry point of the program
             "stopAtEntry": false,
             // Current working directory of the program
