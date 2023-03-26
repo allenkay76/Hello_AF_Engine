@@ -18,7 +18,8 @@
             "environment": [
             ],
             // Which console to use for input/output
-            "console": "internalConsole",
+            "externalConsole": true,
+            "console": "integratedTerminal",//"internalConsole",
             // Which debugger to use
             "MIMode": "gdb",
             // Path to the debugger executable

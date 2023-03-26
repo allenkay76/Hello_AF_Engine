@@ -54,6 +54,7 @@
                 "-g",  // Generate debugging information
                 "-I${workspaceFolder}/include",  // Add the include directory to the search path
                 "${workspaceFolder}/src/*.cpp",  // Compile all .cpp files in the source directory
+                "${workspaceFolder}/scripts/*.cpp",  // Compile all .cpp files in the source directory
                 "-Wall",  // Enable all warnings
                 "-Wextra",  // Enable extra warnings
                 "-Werror",  // Treat warnings as errors
@@ -70,6 +71,7 @@
                 "-L${workspaceFolder}/bin",  // Add the binary directory to the library search path
                 "-lAF_Math",  // Link against the AF_Math library
                 "-lAF_Engine",  // Link against the AF_Engine library
+                //"-lAF_EngineTest"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"  // Set the current working directory to the workspace folder

@@ -1,11 +1,52 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
+#include <memory>
 
 #include "Application/Application.h"
 #include "AF_Math.h"
+//#include "AF_EngineTest.h"
+#include "GameEngine/AF_EngineBehaviour.h"
+#include "Game.h"
+#include "GameEngine/GameEngine.h"
+
 
 int startApplication(int argc, char* args[]);
+
+int startApplication(int argc, char* args[]){
+    // Print the starting message and display the command-line arguments
+    std::cout << "Starting Hello_AF_Engine entry point." << std::endl;
+    std::cout << "Number of arguments: " << argc << std::endl;
+
+    //Check if there is a config file path argument
+    if(argc > 1){
+        std::cout << "First argument: " << args[1] << std::endl;
+
+        //Create the application
+        AppData appData = Application::InitializeAppData(args[1]);
+
+        //Create the game
+        Game* gamePtr = new Game();
+        //Set the game pointer in the appData
+        appData.afEngineBehaviourPtr = gamePtr;
+
+        // Create the application
+        Application application(appData);
+        std::cout << "Application is finished: Goodbye from: " << appData.applicationName << std::endl;
+        
+    }else{
+        std::cout << "Missing Project Config File Path"<< std::endl;
+    }
+
+    // Call the function
+    //double result = AF_Math::reciprocal(2.0);
+    //std::cout << "Linking to AF_Math Success: Test reciprocal method should = 0.5: " << result << std::endl;
+
+    return 1;
+}
+
+
+
 
 #ifdef Linux
 int main(int argc, char* args[]) {
@@ -37,27 +78,3 @@ int WINAPI WinMain(HINSTANCE hInstance,
     return 0;
 }
 #endif
-
-int startApplication(int argc, char* args[]){
-    // Print the starting message and display the command-line arguments
-    std::cout << "Starting Hello_AF_Engine entry point for linux" << std::endl;
-    std::cout << "Number of arguments: " << argc << std::endl;
-
-    //Check if there is a config file path argument
-    if(argc > 1){
-        std::cout << "First argument: " << args[1] << std::endl;
-        // Initialize the application data structure with the desired settings, use the first argument as the config file path
-        AppData appData = Application::InitializeAppData(args[1]);
-        // Create an Application instance with the specified application data
-        Application application(appData);
-    }else{
-        std::cout << "Missing Project Config File Path"<< std::endl;
-    }
-
-        // Call the function
-    double result = AF_Math::reciprocal(2.0);
-    std::cout << "Linking to AF_Math Success: Test reciprocal method should = 0.5: " << result << std::endl;
-    return 1;
-}
-
-
