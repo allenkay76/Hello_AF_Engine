@@ -10,7 +10,7 @@
 #include "Game.h"
 #include "GameEngine/GameEngine.h"
 
-
+//
 int startApplication(int argc, char* args[]);
 
 int startApplication(int argc, char* args[]){
@@ -23,16 +23,21 @@ int startApplication(int argc, char* args[]){
         std::cout << "First argument: " << args[1] << std::endl;
 
         //Create the application
-        AppData appData = Application::InitializeAppData(args[1]);
+        //AppData appData = Application::InitializeAppData(args[1]);
+        std::shared_ptr<AppData> appDataPtr = std::make_unique<AppData>();
 
         //Create the game
-        Game* gamePtr = new Game();
+        std::unique_ptr<Game> gamePtr = std::make_unique<Game>(appDataPtr);
+
+
         //Set the game pointer in the appData
-        appData.afEngineBehaviourPtr = gamePtr;
+        //appData.afEngineBehaviourPtr = gamePtr.get();
 
         // Create the application
-        Application application(appData);
-        std::cout << "Application is finished: Goodbye from: " << appData.applicationName << std::endl;
+        Application application(*appDataPtr.get());
+        //Application* applicationPtr = new Application(appData);
+        std::cout << "Application is finished: Goodbye from: " << appDataPtr->applicationName << std::endl;
+        //delete(applicationPtr);
         
     }else{
         std::cout << "Missing Project Config File Path"<< std::endl;
