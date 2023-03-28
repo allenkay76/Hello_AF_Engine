@@ -10,9 +10,10 @@ void Game::awake(){
     //loadedImage = std::make_unique<ImageData>();
     //gameEngine
 
-    if(m_appDataPtr->gameEnginePtr == nullptr){
-        std::cout << "Game::awake() m_appData->gameEnginePtr is null" << std::endl;
-    }
+
+    //if(m_appDataPtr->gameEnginePtr == nullptr){
+     //   std::cout << "Game::awake() m_appData->gameEnginePtr is null" << std::endl;
+    //}
 
     
     GameEngine::testEngineFunction();
@@ -31,7 +32,7 @@ void Game::awake(){
     if(m_appData->gameEnginePtr->getRenderer() == nullptr){
         std::cout << "Game::awake() m_appData->gameEnginePtr->getRenderer() is null" << std::endl;
     }*/
-    loadedImage = thisGameEngine->getRenderer()->loadImage(imagePath);
+    //loadedImage = thisGameEngine->getRenderer()->loadImage(imagePath);
     //engineRenderer->loadImage(imagePath, loadedImage);
 }
 
@@ -49,9 +50,13 @@ void Game::shutdown() {
 
 
 
-Game::Game(std::shared_ptr<AppData> appData) : m_appDataPtr(appData){
+Game::Game(const std::shared_ptr<AppSubSystems> thisSubSystem){
     std::cout << "Hello_AF_Engine Game constructor" << std::endl;
-    m_appDataPtr->afEngineBehaviourPtr = this;
+
+    thisSubSystem->engineBehaviourPtr = std::shared_ptr<Game>(this);
+    //std::shared_ptr<GameEngine> thisGameEngine = GameEngine::GetInstance();
+    //thisGameEngine->appSubSystems->gameBehaviourPtr = this;
+    //m_appDataPtr->afEngineBehaviourPtr = this;
 }
 
 Game::~Game(){

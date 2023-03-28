@@ -8,8 +8,12 @@
 //#include "AF_EngineTest.h"
 #include "GameEngine/AF_EngineBehaviour.h"
 #include "Game.h"
-#include "GameEngine/GameEngine.h"
+//#include "GameEngine/GameEngine.h"
 
+//declare these as a higher scope to ensure that they live long enough to not cause a crash
+std::shared_ptr<Game> gamePtr = nullptr;
+std::shared_ptr<AppSubSystems> appSubSystemsPtr = nullptr;
+std::shared_ptr<AppData> appDataPtr = nullptr;
 //
 int startApplication(int argc, char* args[]);
 
@@ -24,19 +28,20 @@ int startApplication(int argc, char* args[]){
 
         //Create the application
         //AppData appData = Application::InitializeAppData(args[1]);
-        std::shared_ptr<AppData> appDataPtr = std::make_unique<AppData>();
+        appDataPtr = std::make_shared<AppData>();
+        appSubSystemsPtr = std::make_shared<AppSubSystems>();
 
-        //Create the game
-        std::unique_ptr<Game> gamePtr = std::make_unique<Game>(appDataPtr);
+        //Create the game and pass in the structs containing most of the application data and subsystems
+        //move gamePtr to a higher scope to ensure that it lives long enough to not cause a crash
+        gamePtr = std::make_shared<Game>(appSubSystemsPtr);
 
 
         //Set the game pointer in the appData
         //appData.afEngineBehaviourPtr = gamePtr.get();
 
         // Create the application
-        Application application(*appDataPtr.get());
-        //Application* applicationPtr = new Application(appData);
-        std::cout << "Application is finished: Goodbye from: " << appDataPtr->applicationName << std::endl;
+        Application application(*appDataPtr.get(), appSubSystemsPtr);
+        
         //delete(applicationPtr);
         
     }else{
