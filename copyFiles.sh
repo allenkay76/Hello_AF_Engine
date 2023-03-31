@@ -6,7 +6,7 @@ if [ ! -d bin ]; then
 fi
 
 # Create the build directory if it does not exist
-if [ ! -d bin/build ]; then
+if [ ! -d bin/debug_WIN_x64 ]; then
   mkdir bin/debug_WIN_x64
 fi
 

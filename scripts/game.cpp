@@ -24,7 +24,7 @@ void Game::awake(){
         std::cout << "Game::awake() m_appData->gameEnginePtr->getRenderer() is null" << std::endl;
     }
     /**/
-    loadedImage = thisGameEngine->getRenderer()->loadImage(imagePath);
+    //loadedImage = thisGameEngine->getRenderer()->loadImage(imagePath);
 }
 
 void Game::start() {
