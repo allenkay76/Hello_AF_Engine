@@ -2,38 +2,29 @@
 #include "Rendering/imageData.h"
 #include "GameEngine/GameEngine.h"
 
-const char* imagePath = "..\\assets\\textures\\atom_forge_art.png";
+const char* imagePath = "assets\\textures\\atom_forge_art.png";
 std::unique_ptr<ImageData> loadedImage = nullptr;
 
 void Game::awake(){            
     std::cout << "Hello_AF_Engine Game awake" << std::endl;
-    //loadedImage = std::make_unique<ImageData>();
+
     //gameEngine
+    std::shared_ptr<GameEngine> thisGameEngine = GameEngine::GetInstance();
+
+    if(thisGameEngine == nullptr){
+     std::cout << "Game::awake() m_appData->gameEnginePtr is null" << std::endl;
+    }
 
 
-    //if(m_appDataPtr->gameEnginePtr == nullptr){
-     //   std::cout << "Game::awake() m_appData->gameEnginePtr is null" << std::endl;
-    //}
 
     
-    GameEngine::testEngineFunction();
-    std::cout << "testEngineFunction()" << std::endl;
-
-    int returnValue =  GameEngine::returnTextEngineFunction();
-    std::cout << "returnTextEngineFunction() = " << returnValue << std::endl;
-
-    int returnMultValue = GameEngine::multTextEngineFunction(400,69);
-    std::cout << "returnTextEngineFunction() = " << returnMultValue << std::endl;
-
-
-    std::shared_ptr<GameEngine> thisGameEngine = GameEngine::GetInstance();
     std::cout << "thisGameEngine = " << thisGameEngine << std::endl;
-    /*
-    if(m_appData->gameEnginePtr->getRenderer() == nullptr){
+    
+    if(thisGameEngine->getRenderer() == nullptr){
         std::cout << "Game::awake() m_appData->gameEnginePtr->getRenderer() is null" << std::endl;
-    }*/
-    //loadedImage = thisGameEngine->getRenderer()->loadImage(imagePath);
-    //engineRenderer->loadImage(imagePath, loadedImage);
+    }
+    /**/
+    loadedImage = thisGameEngine->getRenderer()->loadImage(imagePath);
 }
 
 void Game::start() {

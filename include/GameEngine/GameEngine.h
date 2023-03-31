@@ -7,7 +7,6 @@
 #endif
 // Include necessary header files
 #include <memory>
-#include "GameEngine/ScriptManager.h"
 #include "GameEngine/IRenderer.h"
 #include "GameEngine/IInput.h"
 #include "Utils/SingletonRoot.h"

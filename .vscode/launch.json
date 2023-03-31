@@ -7,7 +7,7 @@
             "type": "cppdbg",
             "request": "launch",
             // Path to the executable to debug
-            "program": "${workspaceFolder}/bin/Hello_AF_Engine.exe",
+            "program": "${workspaceFolder}/bin/debug_WIN_x64/Hello_AF_Engine.exe",
             // Command line arguments to the executable
             "args": ["config/AF_Engine.json"],
             // Whether or not to stop at the entry point of the program
