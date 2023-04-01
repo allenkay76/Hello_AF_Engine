@@ -53,6 +53,8 @@
                 "-fdiagnostics-color=always",  // Output diagnostic messages in color
                 "-g",  // Generate debugging information
                 "-I${workspaceFolder}/include",  // Add the include directory to the search path
+                "-I${workspaceFolder}/src",  // Add the include directory to the search path
+                "-I${workspaceFolder}/scripts",  // Add the include directory to the search path
                 "${workspaceFolder}/src/*.cpp",  // Compile all .cpp files in the source directory
                 "${workspaceFolder}/scripts/*.cpp",  // Compile all .cpp files in the source directory
                 "-Wall",  // Enable all warnings
