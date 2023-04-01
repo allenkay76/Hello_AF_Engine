@@ -37,3 +37,6 @@ cp -R ../AF_Engine/assets/* bin/debug_WIN_x64/assets/
 
 #copy SDL2.dll
 cp ../AF_Engine/bin/SDL2.dll bin/debug_WIN_x64/
+
+#copy SDL2.dll
+cp ../SDK/glew-2.1.0/lib/glew32.dll bin/debug_WIN_x64/
