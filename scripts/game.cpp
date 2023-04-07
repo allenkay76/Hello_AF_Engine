@@ -19,10 +19,10 @@ void Game::awake(){
 
     
     std::cout << "thisGameEngine = " << thisGameEngine << std::endl;
-    
+    /*
     if(thisGameEngine->getRenderer() == nullptr){
         std::cout << "Game::awake() m_appData->gameEnginePtr->getRenderer() is null" << std::endl;
-    }
+    }*/
     /**/
     //loadedImage = thisGameEngine->getRenderer()->loadImage(imagePath);
 }
