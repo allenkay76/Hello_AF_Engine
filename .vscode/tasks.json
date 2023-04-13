@@ -55,6 +55,8 @@
                 "-I${workspaceFolder}/include",  // Add the include directory to the search path
                 "-I${workspaceFolder}/src",  // Add the include directory to the search path
                 "-I${workspaceFolder}/scripts",  // Add the include directory to the search path
+                "-I${workspaceFolder}/../SDK/glew-2.1.0/include", // Add the GLEW library directory to the search path
+                "-L${workspaceFolder}/../SDK/glew-2.1.0/lib", // Add the GLEW library directory to the search path
                 "${workspaceFolder}/src/*.cpp",  // Compile all .cpp files in the source directory
                 "${workspaceFolder}/scripts/*.cpp",  // Compile all .cpp files in the source directory
                 "-Wall",  // Enable all warnings
@@ -66,6 +68,7 @@
                 "-Wshadow",  // Warn about variable shadowing
                 "-fstack-protector-strong",  // Enable stack protection
                 "-D_FORTIFY_SOURCE=2",  // Enable fortified source code
+                "-DSDL_GAME_RENDERER", //This is a flag to tell the engine to use the SDL renderer
                 "-o",  // Specify the output file
                 "${workspaceFolder}/bin/debug_WIN_x64/Hello_AF_Engine.exe",  // The output file name and location
                 "-static-libgcc",  // Link statically against libgcc

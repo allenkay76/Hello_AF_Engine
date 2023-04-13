@@ -2,8 +2,10 @@
 #include "GameEngine/AF_EngineBehaviour.h"
 #include <iostream>
 #include <memory>
+
 #include "Application/AppData.h"
 #include "Application/AppSubsystems.h"
+#include "GameEngine/IInput.h"
 
 class Game : public AF_EngineBehaviour
 {

@@ -38,5 +38,11 @@ cp -R ../AF_Engine/assets/* bin/debug_WIN_x64/assets/
 #copy SDL2.dll
 cp ../AF_Engine/bin/SDL2.dll bin/debug_WIN_x64/
 
-#copy SDL2.dll
+#copy SDL2_ttf.dll
+cp ../SDK/SDL2_ttf-devel-2.20.2-mingw/SDL2_ttf-2.20.2/i686-w64-mingw32/bin/SDL2_ttf.dll bin/debug_WIN_x64/
+
+#copy SDL2_image.dll
+cp ../SDK/SDL2_image-devel-2.6.3-mingw/SDL2_image-2.6.3/i686-w64-mingw32/bin/SDL2_image.dll bin/debug_WIN_x64/
+
+#copy glew32.dll
 cp ../SDK/glew-2.1.0/lib/glew32.dll bin/debug_WIN_x64/
