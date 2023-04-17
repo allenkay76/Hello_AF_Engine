@@ -19,13 +19,12 @@ std::shared_ptr<AppData> appDataPtr = nullptr;
 int startApplication(int argc, char* args[]);
 
 int startApplication(int argc, char* args[]){
-    // Print the starting message and display the command-line arguments
-    std::cout << "Starting Hello_AF_Engine entry point." << std::endl;
-    std::cout << "Number of arguments: " << argc << std::endl;
+    LogManager::Log("Application: Starting Application", args[0], argc);
+    
 
     //Check if there is a config file path argument
     if(argc > 1){
-        std::cout << "First argument: " << args[1] << std::endl;
+        
 
         //Create the application
         //AppData appData = Application::InitializeAppData(args[1]);
