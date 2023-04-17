@@ -2,8 +2,15 @@
 #include "Rendering/imageData.h"
 #include "GameEngine/GameEngine.h"
 #include "GameEngine/IInput.h"
+#include "GameEngine/ITimer.h"
+
+#include "SDL/SDLGameTimer.h"
 
 #include "SDL/SDLGameInput.h"
+
+//#include <iomanip> // Include the iomanip header
+#include <iomanip>
+
 
 const char* imagePath = "assets\\textures\\atom_forge_art.png";
 const char* fontPath = "assets\\fonts\\arial.ttf";
@@ -28,6 +35,7 @@ const char* vertexShaderSource = "assets\\shaders\\unlitVertexShader.vs";
 const char* fragmentShaderSource = "assets\\shaders\\unlitFragmentShader.fs";
 
 IInput* inputService = nullptr;
+ITimer* timerService = nullptr;
 
 void Game::awake(){            
     std::cout << "Hello_AF_Engine Game awake" << std::endl;
@@ -51,6 +59,7 @@ void Game::awake(){
     //loadedImage = thisGameEngine->getRenderer()->loadImage(imagePath);
 
     inputService = IInputLocator::getInput();
+    timerService = ITimerLocator::getTimer();
 }
 
 void Game::start() {
@@ -61,12 +70,31 @@ void Game::start() {
     // Create the font
     // Create the text
     // Create the player
-
+    std::cout << "Game FrameRate: " << timerService->getAvgFrameRate() << std::endl;
 
 }
 
 void Game::update() {
     //std::cout << "Hello_AF_Engine Game update" << std::endl;
+
+    float avgFps = timerService->getAvgFrameRate();
+    std::string frameTimeText = "Frame_Time: " + std::to_string(timerService->getFrameTicks()) + " ms | AVG_FPS: ";
+
+    // format the average FPS to 2 decimal places
+    std::ostringstream stream;
+    stream << std::fixed << std::setprecision(2) << avgFps;
+    frameTimeText += stream.str() + " fps"; // add the fps unit at the end
+
+    std::cout << '\r' << std::string(frameTimeText.length(), ' ') << '\r' << frameTimeText << std::flush;
+
+
+
+
+
+
+
+    //std::string frameRateText = "GameEngine: Avg Frame Rate: "  + std::to_string((timerService->getAvgFrameRate()));
+    //std::cout << '\r' << std::string(frameRateText.length(), ' ') << '\r' << frameRateText << std::flush;
 
     //If a key is pressed, update the player position
     if (inputService->getKeyPressed()){//IInput::getKeyPressed()){
