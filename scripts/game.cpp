@@ -3,6 +3,7 @@
 #include "GameEngine/GameEngine.h"
 #include "GameEngine/IInput.h"
 #include "GameEngine/ITimer.h"
+#include "GameEngine/IRenderer.h"
 
 #include "SDL/SDLGameTimer.h"
 
@@ -33,6 +34,7 @@ const char* fragmentShaderSource = "assets\\shaders\\unlitFragmentShader.fs";
 
 IInput* inputService = nullptr;
 ITimer* timerService = nullptr;
+IRenderer* rendererService = nullptr;
 
 void Game::awake(){            
 
@@ -43,15 +45,14 @@ void Game::awake(){
         LogManager::Log("Game::awake() m_appData->gameEnginePtr is null");
     }
 
-    /*
-    if(thisGameEngine->getRenderer() == nullptr){
-        std::cout << "Game::awake() m_appData->gameEnginePtr->getRenderer() is null" << std::endl;
-    }*/
+    
+    /**/
     /**/
     //loadedImage = thisGameEngine->getRenderer()->loadImage(imagePath);
 
     inputService = IInputLocator::getInput();
     timerService = ITimerLocator::getTimer();
+    rendererService = IRendererLocator::getRenderer();
 }
 
 void Game::start() {
