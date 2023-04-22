@@ -74,23 +74,11 @@ void Game::update() {
     //If a key is pressed, update the player position
     if (inputService->getKeyPressed()){
         //Key is pressed
-       auto& keyEvents = inputService->getKeyEvents();
-        int count = 0;
-        for (const auto& event : keyEvents) {
-            if (event) {
-                count++;
-            }
+        //inputService->printAllKeyEvents();
+        if(inputService->getKeyCodePressed(27)){
+            LogManager::Log("ESC key pressed");
+            thisGameEngine->requestGameExit();
         }
-        if (count > 0) {
-            LogManager::Log("\n events in keyEvents: %d \n", count);
-            for (const auto& event : keyEvents) {
-                if (event) {
-                    LogManager::Log("\n Key event: %d %d \n", event->keyCode, event->keyDown);
-                }
-            }
-        }
-    }else{
-        //Key is not pressed
     }
 
     //date score text
