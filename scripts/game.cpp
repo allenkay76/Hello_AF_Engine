@@ -74,7 +74,21 @@ void Game::update() {
     //If a key is pressed, update the player position
     if (inputService->getKeyPressed()){
         //Key is pressed
-        //LogManager::Log("\nKey is pressed \n");
+       auto& keyEvents = inputService->getKeyEvents();
+        int count = 0;
+        for (const auto& event : keyEvents) {
+            if (event) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            LogManager::Log("\n events in keyEvents: %d \n", count);
+            for (const auto& event : keyEvents) {
+                if (event) {
+                    LogManager::Log("\n Key event: %d %d \n", event->keyCode, event->keyDown);
+                }
+            }
+        }
     }else{
         //Key is not pressed
     }
