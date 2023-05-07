@@ -1,5 +1,9 @@
 #include "Game.h"
 #include <string>   
+
+
+#include <iostream>
+
 #include "Rendering/imageData.h"
 #include "GameEngine/GameEngine.h"
 #include "GameEngine/IInput.h"
@@ -93,6 +97,8 @@ void Game::CreateTestObject(){
     std::unique_ptr<AF_Quad> quadMesh = std::make_unique<AF_Quad>();
     std::unique_ptr<GL_BufferObject> testBufferObject = std::make_unique<GL_BufferObject>();
     std::unique_ptr<GLMaterial> testMaterial = std::make_unique<GLMaterial>();
+
+
     std::string vert = "assets/shaders/basicUnlit.vs"; //"./bin/debug_WIN_x64/assets/shaders/basicUnlit.vs";
     //std::string vert =  "assets/shaders/basicUnlitTrans.vs"; // "./bin/debug_WIN_x64/assets/shaders/basicUnlitTrans.vs";
     std::string frag = "assets/shaders/basicUnlit2.fs"; //"./bin/debug_WIN_x64/assets/shaders/basicUnlit2.fs";
