@@ -16,6 +16,8 @@ class Game : public AF_EngineBehaviour
         void start() override;
         void update() override;
         void shutdown() override;
+
+        void CreateTestObject();
     private:
         //std::shared_ptr<AppData> m_appDataPtr = nullptr;
         
