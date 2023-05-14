@@ -112,6 +112,7 @@ void Game::CreateTestObject(){
     //rendererService->addMesh(std::move(testMesh));
 
     //rendererService->addMesh(testMesh);
+    LogManager::Log("\ntestMesh shaderID at game::start is: %i\n", testMesh->getMaterial()->getShader()->getProgramID());
     playerGO->setMesh(testMesh);
 
 }
@@ -140,6 +141,8 @@ void Game::update() {
                 //S key pressed
                 playerYPos -= 0.1f;
                 //LogManager::Log("\n s key pressed\n");
+                //LogManager::Log("\ntestMesh shaderID at game::update is: %i\n", playerGO->getMesh()->getMaterial()->getShader()->getProgramID());
+
                
             }else if(inputService->getKeyCodePressed(97)){
                 //A key pressed
