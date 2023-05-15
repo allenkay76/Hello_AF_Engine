@@ -16,7 +16,7 @@
 
 //Stuff to make a mesh object
 #include "Rendering/IMesh.h"
-#include "Rendering/AF_Mesh.h"
+//#include "Rendering/AF_Mesh.h"
 #include "OpenGL/GL_BufferObject.h"
 #include "OpenGL/GLMaterial.h"
 #include "OpenGL/GLMesh.h"
