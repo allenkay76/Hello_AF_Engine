@@ -45,14 +45,29 @@ std::shared_ptr<GameEngine> thisGameEngine = nullptr;
 //Create shader for player
 //player color
 //TODO create a color struct
-const char* vertexShaderSource = "assets\\shaders\\unlitVertexShader.vs";
-const char* fragmentShaderSource = "assets\\shaders\\unlitFragmentShader.fs";
+const std::string vert = "assets/shaders/basicUnlit.vs"; //"./bin/debug_WIN_x64/assets/shaders/basicUnlit.vs";
+const std::string frag = "assets/shaders/basicUnlit2.fs"; //"./bin/debug_WIN_x64/assets/shaders/basicUnlit2.fs";
+    
 
 IInput* inputService = nullptr;
 ITimer* timerService = nullptr;
 IRenderer* rendererService = nullptr;
 
 std::unique_ptr<GameObject_Shape> playerGO = nullptr;
+
+AF_Vec4 whiteColor{1.0f, 1.0f, 1.0f, 1.0f};
+AF_Vec4 redColor{1.0f, 0.0f, 0.0f, 1.0f};
+AF_Vec4 greenColor{0.0f, 1.0f, 0.0f, 1.0f};
+AF_Vec4 blueColor{0.0f, 0.0f, 1.0f, 1.0f};
+
+AF_Vec4 currentColor;
+
+//rendering variables
+std::unique_ptr<AF_Quad> quadMesh;
+std::unique_ptr<GL_BufferObject> testBufferObject;
+std::unique_ptr<GLMaterial> testMaterial;
+std::unique_ptr<IShader> testShader;
+std::shared_ptr<GLMesh> testMesh;
 
 void Game::awake(){            
 
@@ -76,6 +91,7 @@ void Game::awake(){
     //Make the player game object
     playerGO = std::make_unique<GameObject_Shape>();
     
+    currentColor = whiteColor;
 }
 
 void Game::start() {
@@ -84,8 +100,6 @@ void Game::start() {
     // Create the font
     // Create the text
     // Create the player
-    //std::cout << "Game FrameRate: " << timerService->getAvgFrameRate() << std::endl;
-    //LogManager::Log("Testing Log Manager from game", timerService->getAvgFrameRate());
     CreateTestObject();
     
 }
@@ -94,24 +108,17 @@ void Game::CreateTestObject(){
     //Create the mesh vector
     //std:: m_meshes = std::make_unique<std::vector<std::unique_ptr<IMesh>>>();
     //Create the mesh
-    std::unique_ptr<AF_Quad> quadMesh = std::make_unique<AF_Quad>();
-    std::unique_ptr<GL_BufferObject> testBufferObject = std::make_unique<GL_BufferObject>();
-    std::unique_ptr<GLMaterial> testMaterial = std::make_unique<GLMaterial>();
+    quadMesh = std::make_unique<AF_Quad>();
+    testBufferObject = std::make_unique<GL_BufferObject>();
+    testMaterial = std::make_unique<GLMaterial>();
 
 
-    std::string vert = "assets/shaders/basicUnlit.vs"; //"./bin/debug_WIN_x64/assets/shaders/basicUnlit.vs";
-    //std::string vert =  "assets/shaders/basicUnlitTrans.vs"; // "./bin/debug_WIN_x64/assets/shaders/basicUnlitTrans.vs";
-    std::string frag = "assets/shaders/basicUnlit2.fs"; //"./bin/debug_WIN_x64/assets/shaders/basicUnlit2.fs";
-    std::unique_ptr<IShader> testShader = std::make_unique<GL_Shader>(std::string(vert), std::string(frag));
+    testShader = std::make_unique<GL_Shader>(std::string(vert), std::string(frag));
     testMaterial->setShader(std::move(testShader));
     // Create the mesh, ensure we transfer ownership of the mesh to the IMesh object
     // need to also pass in the derived openGL buffer object which is derived from IBuffer_Object. This way we can swap from opegl to other standards
-    std::shared_ptr<GLMesh> testMesh = std::make_shared<GLMesh>(std::move(quadMesh), std::move(testBufferObject), std::move(testMaterial));
+    testMesh = std::make_shared<GLMesh>(std::move(quadMesh), std::move(testBufferObject), std::move(testMaterial));
   
-    
-    //rendererService->addMesh(std::move(testMesh));
-
-    //rendererService->addMesh(testMesh);
     LogManager::Log("\ntestMesh shaderID at game::start is: %i\n", testMesh->getMaterial()->getShader()->getProgramID());
     playerGO->setMesh(testMesh);
 
@@ -140,9 +147,6 @@ void Game::update() {
             }else if(inputService->getKeyCodePressed(115)){
                 //S key pressed
                 playerYPos -= 0.1f;
-                //LogManager::Log("\n s key pressed\n");
-                //LogManager::Log("\ntestMesh shaderID at game::update is: %i\n", playerGO->getMesh()->getMaterial()->getShader()->getProgramID());
-
                
             }else if(inputService->getKeyCodePressed(97)){
                 //A key pressed
@@ -153,14 +157,30 @@ void Game::update() {
                 playerXPos += 0.1f;
                 LogManager::Log("\n d key pressed\n");
             }
+
+
+            //red
+            if(inputService->getKeyCodePressed(114)){
+                //D key pressed
+                currentColor = redColor;
+                LogManager::Log("\n r key pressed\n");
+            } else if(inputService->getKeyCodePressed(103)){
+                //g key pressed
+                currentColor = greenColor;
+                LogManager::Log("\n g key pressed\n");
+            } else if(inputService->getKeyCodePressed(98)){
+                //D key pressed
+                currentColor = blueColor;
+                LogManager::Log("\n b key pressed\n");
+            }
     }
 
+    //set the color based on player input.
+    playerGO->getMesh().getMaterial()->setMaterialColor(currentColor);
     
     //update the player position
     playerGO->getTransform().position.x = playerXPos;
     playerGO->getTransform().position.y = playerYPos;
-    //LogManager::Log("\nGame LColVal: %f\n" , playerYPos);
-    //playerGO->getTransform().position.y) );
     playerGO->update();
 
     //date score text
