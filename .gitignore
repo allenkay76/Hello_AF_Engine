@@ -36,3 +36,9 @@
 
 #Folders
 include/*
+src/Application/*
+src/GameEngine/*
+src/Gameplay/*
+src/OpenGL/*
+src/SDL/*
+src/Utils/*
