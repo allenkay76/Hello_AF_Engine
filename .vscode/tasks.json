@@ -3,56 +3,75 @@
         {
             "label": "clean",
             "type": "shell",
-            "command": "${command:clean}",
-            "args": [
-                "${args:clean}"
+            "dependsOrder": "sequence",
+            "dependsOn": [
+              "cleanBin",
+              "cleanInclude"
             ],
-            "problemMatcher": [],
-            "group": "build",
+            "group": "build"
+          },
+          {
+            "label": "cleanBin",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+              "/C",
+              "for /D %d in (${workspaceFolder}\\bin\\*) do @rd /S /Q \"%d\""
+            ],
             "windows": {
-                "command": "cmd",
-                "args": [
-                    "/C",
-                    "del",
-                    "/F",
-                    "/Q",
-                    "${workspaceFolder}/bin/*",
-                    "${workspaceFolder}/include/*"
-                ]
+              "command": "cmd",
+              "args": ["/C", "for /D %d in (${workspaceFolder}\\bin\\*) do @rd /S /Q \"%d\""]
             },
             "linux": {
-                "command": "rm",
-                "args": [
-                    "-f",
-                    "${workspaceFolder}/bin/debug_WIN_x64/Hello_AF_Engine"
-                ]
+              "command": "rm",
+              "args": ["-rf", "${workspaceFolder}/bin/*"]
+            }
+          },
+          {
+            "label": "cleanInclude",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+              "/C",
+              "del /F /Q \"${workspaceFolder}\\include\\*\""
+            ],
+            "windows": {
+              "command": "cmd",
+              "args": ["/C", "del /F /Q \"${workspaceFolder}\\include\\*\""]
+            },
+            "linux": {
+              "command": "rm",
+              "args": ["-f", "${workspaceFolder}/include/*"]
             }
         },
         {
             "label": "copyFiles",
             "type": "shell",
-            "command": "bash",
+            "command": "C:\\Program Files\\Git\\bin\\bash.exe",
             "args": [
-                "${workspaceFolder}/copyFiles.sh"
+              "${workspaceFolder}\\copyFiles.sh"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+              "cwd": "${workspaceFolder}"
             },
             "group": {
-                "kind": "build",
-                "isDefault": true
+              "kind": "build",
+              "isDefault": true
             },
-            "detail": "Copies the AF_Math.dll and include files to the project directory",
-            "dependsOn": "clean"
+            "detail": "Copies the AF_Engine.dll and include files to the project directory",
+            "dependsOn": [
+                "clean"
+            ],
         },       
         {
             "label": "Build_Hello_AF_ENGINE_Win_DEBUG",  // A label for the command
             "type": "shell",  // Specifies that this is a shell command
-            "command": "g++",  // The command to execute (g++)
+            "command": "g++",  // The command to execute (g++)#
             "args": [
                 "-fdiagnostics-color=always",  // Output diagnostic messages in color
                 "-g",  // Generate debugging information
                 "-I${workspaceFolder}/include",  // Add the include directory to the search path
+                "-I${workspaceFolder}/../SDK/mingw_dev_lib/i686-w64-mingw32/include", // Add the SDL2 include directory to the search path
                 "-I${workspaceFolder}/src",  // Add the include directory to the search path
                 "-I${workspaceFolder}/scripts",  // Add the include directory to the search path
                 "-I${workspaceFolder}/../SDK/glew-2.1.0/include", // Add the GLEW library directory to the search path
@@ -74,9 +93,7 @@
                 "-static-libgcc",  // Link statically against libgcc
                 "-static-libstdc++",  // Link statically against libstdc++
                 "-L${workspaceFolder}/bin/debug_WIN_x64",  // Add the binary directory to the library search path
-                "-lAF_Math",  // Link against the AF_Math library
                 "-lAF_Engine",  // Link against the AF_Engine library
-                //"-lAF_EngineTest"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"  // Set the current working directory to the workspace folder

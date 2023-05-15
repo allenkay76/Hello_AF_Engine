@@ -11,7 +11,6 @@ if [ ! -d bin/debug_WIN_x64 ]; then
 fi
 
 # Copy the AF_Math.dll file from AF_Math/bin to the current directory's bin folder
-cp ../AF_Math/bin/AF_Math.dll bin/debug_WIN_x64/
 cp ../AF_Engine/bin/AF_Engine.dll bin/debug_WIN_x64/
 #cp ../AF_EngineTest/bin/AF_EngineTest.dll bin/
 
@@ -22,7 +21,6 @@ if [ ! -d include ]; then
 fi
 
 # Copy the include folder from AF_Math to the current directory's include folder
-cp -R ../AF_Math/include/* include/
 cp -R ../AF_Engine/include/* include/
 #cp -R ../AF_EngineTest/include/* include/
 
@@ -36,7 +34,7 @@ fi
 cp -R ../AF_Engine/assets/* bin/debug_WIN_x64/assets/
 
 #copy SDL2.dll
-cp ../AF_Engine/bin/SDL2.dll bin/debug_WIN_x64/
+cp ../SDK/mingw_dev_lib/i686-w64-mingw32/bin/SDL2.dll bin/debug_WIN_x64/
 
 #copy SDL2_ttf.dll
 cp ../SDK/SDL2_ttf-devel-2.20.2-mingw/SDL2_ttf-2.20.2/i686-w64-mingw32/bin/SDL2_ttf.dll bin/debug_WIN_x64/
